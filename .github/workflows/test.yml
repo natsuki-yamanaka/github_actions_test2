@@ -1,0 +1,23 @@
+on:
+  push:
+    branches:
+      - '*'
+
+jobs:
+  test:
+    env:
+      TEST_VALUE: ${{ secrets.TEST_VALUE }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: test write
+        run: |
+          echo "${TEST_VALUE}" > test.txt
+          echo "${{ secrets.TEST_VALUE }}" > test2.txt
+          echo "${{ env.TEST_VALUE }}" > test3.txt
+        env:
+          TEST_VALUE: ${{ secrets.TEST_VALUE }}
+      - name: test read
+        run: |
+          cat test.txt|wc -l
+          cat test2.txt|wc -l
+          cat test3.txt|wc -l
