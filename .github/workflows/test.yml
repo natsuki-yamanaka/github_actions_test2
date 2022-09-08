@@ -3,10 +3,9 @@ on:
     branches:
       - '*'
 
-environment: TEST
-
 jobs:
   test:
+    environment: TEST
     env:
       TEST_VALUE: ${{ secrets.TEST_VALUE }}
     runs-on: ubuntu-latest
